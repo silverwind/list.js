@@ -72,7 +72,7 @@ module.exports = function(list) {
 
   var addEvent = function(elm, i, page) {
      events.bind(elm, 'click', function() {
-       list.show((i-1)*page + 1, page);
+       if(i) list.show((i-1)*page + 1, page);
      });
   };
 
