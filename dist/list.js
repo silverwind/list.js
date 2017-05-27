@@ -1419,9 +1419,17 @@ var Templater = function(list) {
       elm = undefined;
     };
     if (!templater.create(item)) {
-      for(var v in values) {
-        if (values.hasOwnProperty(v)) {
-          setValue(v, values[v]);
+      console.log("NOCR");
+      if (typeof list.item === 'function') {
+        console.log("ISF");
+        // var src = templater.getItemSource();
+        // item.elm = templater.clearSourceItem(src, list.valueNames);
+        item.elm.innerHTML = list.item(item.values()).trim();
+      } else {
+        for(var v in values) {
+          if (values.hasOwnProperty(v)) {
+            setValue(v, values[v]);
+          }
         }
       }
     }

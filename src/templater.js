@@ -120,9 +120,13 @@ var Templater = function(list) {
       elm = undefined;
     };
     if (!templater.create(item)) {
-      for(var v in values) {
-        if (values.hasOwnProperty(v)) {
-          setValue(v, values[v]);
+      if (typeof list.item === 'function') {
+        item.elm.innerHTML = list.item(item.values()).trim();
+      } else {
+        for(var v in values) {
+          if (values.hasOwnProperty(v)) {
+            setValue(v, values[v]);
+          }
         }
       }
     }
