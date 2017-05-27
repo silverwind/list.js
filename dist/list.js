@@ -1420,7 +1420,10 @@ var Templater = function(list) {
     };
     if (!templater.create(item)) {
       if (typeof list.item === 'function') {
-        item.elm.outerHTML = list.item(item.values()).trim();
+        var vals = item.values(vals);
+        // TODO: find a better way to set single values
+        // by parsind the templated html for the class
+        item.elm.innerHTML = list.item(vals).trim().match(/^<.+?>([\s\S]*)<\/.+?>/)[1];
       } else {
         for(var v in values) {
           if (values.hasOwnProperty(v)) {
