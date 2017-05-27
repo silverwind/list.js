@@ -983,14 +983,14 @@ module.exports = function(list) {
 
   var addEvent = function(elm, i, page) {
      events.bind(elm, 'click', function() {
-       list.show((i-1)*page + 1, page);
+       if(i) list.show((i-1)*page + 1, page);
      });
   };
 
   return function(options) {
     var pagingList = new List(list.listContainer.id, {
       listClass: options.paginationClass || 'pagination',
-      item: "<li><a class='page' href='javascript:function Z(){Z=\"\"}Z()'></a></li>",
+      item: "<li><a class='page' href='#'></a></li>",
       valueNames: ['page', 'dotted'],
       searchClass: 'pagination-search-that-is-not-supposed-to-exist',
       sortClass: 'pagination-sort-that-is-not-supposed-to-exist'
@@ -1419,11 +1419,7 @@ var Templater = function(list) {
       elm = undefined;
     };
     if (!templater.create(item)) {
-      console.log("NOCR");
       if (typeof list.item === 'function') {
-        console.log("ISF");
-        // var src = templater.getItemSource();
-        // item.elm = templater.clearSourceItem(src, list.valueNames);
         item.elm.innerHTML = list.item(item.values()).trim();
       } else {
         for(var v in values) {
