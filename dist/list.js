@@ -1420,7 +1420,7 @@ var Templater = function(list) {
     };
     if (!templater.create(item)) {
       if (typeof list.item === 'function') {
-        item.elm.innerHTML = list.item(item.values()).trim();
+        item.elm.outerHTML = list.item(item.values()).trim();
       } else {
         for(var v in values) {
           if (values.hasOwnProperty(v)) {
